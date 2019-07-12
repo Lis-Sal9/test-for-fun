@@ -37,11 +37,12 @@
 
 #site_chart {
     padding: 2.6vh;
+    padding-top:0 !important;
     padding-bottom: 4vh !important;
     position:fixed;
     width:20vw;
-    height:50vh;
-    top:50vh;
+    height:45vh;
+    top:55vh;
 }
 
 #site_chart div, #site_chart table

@@ -21,18 +21,18 @@ body
 {
     position: fixed;
     display: flex;
-    height: 10vh;
+    height: 12vh;
     width:calc(100vw - 20vw);
-    background-color:green;
     top: 0;
 }
 
 .site_logo
 {
-    height: 10vh;
+    height: 12vh;
     cursor: pointer;
     margin-left: 3vh;
     min-width: 15vh;
+    padding: 0;
 }
 
 .site_logo:hover
@@ -42,12 +42,7 @@ body
 
 .site_title
 {
-    height: 9vh;
-}
-
-.site_search
-{
-    padding-left:1vh !important;
-    margin-left:8vh;
+    height: 12vh;
+    padding:1vh;
 }
 
