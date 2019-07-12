@@ -45,7 +45,7 @@
     background: darkolivegreen;
     color: white;
     text-shadow: 0 0 1vh forestgreen;
-    padding: 0 2.67vh 0 2vh;
+    padding: 0 2.67vh 0 2.67vh;
     border-radius: 3.25vh;
     box-shadow: 0 0 2.7vh 0 darkgreen,
     0 2.17vh 2.7vh 0 rgba(0, 0, 0, 0.2);
@@ -98,7 +98,7 @@
     content: "";
     position: absolute;
     margin: auto;
-    top: 2.2vh;
+    top: 2.6vh;
     right: 1vw;
     bottom: 0.5vh;
     left: 1.75vw;
@@ -149,11 +149,13 @@
     padding-right: 0 !important;
     padding-bottom: 0.5vh;
     font-size: 1.5vh;
+    text-align: center;
 }
 
 .site_character_image
 {
     width:100%;
+    border-radius: 30%;
 }
 
 .site_label

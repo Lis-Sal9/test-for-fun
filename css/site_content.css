@@ -1,0 +1,48 @@
+
+/** Content **/
+.site_content
+{
+    position: fixed;
+    height: calc(100vh - 12vh);
+    width:calc(100vw - 20vw);
+    top: 12vh;
+    left: 0;
+    padding: 4vh;
+}
+
+.site_cards
+{
+    position: fixed;
+    display: flex;
+  /*  flex-direction: row;*/
+    width: calc(100vw - 27vw);
+    height: calc(100vh - 24vh);
+    background-color: #45ad6e;
+}
+
+.site_pagination
+{
+    position: fixed;
+    width: calc(100vw - 27vw);
+    height: 4vh;
+    background-color: #ad9267;
+    top: calc(100vh - 8vh);
+}
+
+/** Cards **/
+.site_card
+{
+    width: 14.6vw;
+    height: 20vh;
+    padding: 2vh;
+}
+
+.site_card_image
+{
+    border-radius: 30% !important;
+}
+
+.site_card_image:hover
+{
+    border: solid #afa71d 0.5vh;
+}
