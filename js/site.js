@@ -7,9 +7,16 @@ let title = document.getElementsByClassName('site_title')[0];
 let site_header = document.getElementsByClassName('site_header')[0];
 */
 
-//chart class colors
 
+// Click on search
+let search = document.getElementsByClassName('site_search')[0];
+let search_submit = search.getElementsByClassName('search')[0];
+let search_input = search.getElementsByTagName('input')[0];
 
+search_submit.addEventListener('click', function(){
+    search_input.focus();
+    search_input.value = '';
+});
 
 
 
