@@ -16,13 +16,6 @@
     text-align: right;
 }
 
-@media screen and (max-width: 1024px)
-{
-    .volk_menu_top
-    {
-        display: none;
-    }
-}
 
 .volk_menu_top span:first-child
 {

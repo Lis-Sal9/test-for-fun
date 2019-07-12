@@ -19,15 +19,20 @@ body
 /** Header **/
 .site_header
 {
+    position: fixed;
     display: flex;
     height: 10vh;
-    padding-bottom:1vh;
+    width:calc(100vw - 20vw);
+    background-color:green;
+    top: 0;
 }
 
 .site_logo
 {
     height: 10vh;
     cursor: pointer;
+    margin-left: 3vh;
+    min-width: 15vh;
 }
 
 .site_logo:hover

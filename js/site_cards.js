@@ -7,7 +7,7 @@ let site_click_character = function () {
 
     let id = this.className.split('_')[1];
     this.style.border = 'solid #afa71d 2px';
-    getCharacter(id);
+    getCharacter(1);
 };
 
 
@@ -27,10 +27,10 @@ function listCharacters()
           //  let row = 1;
           //  let cards_row = null;
 
-
-                for (let i=0; i<=data.results.length; i++) {
+            if (data.results !== null && data.results !== undefined) {
+                for (let i=0; i<data.results.length; i++) {
             //    let linebreak = false;
-                    if (data.results[i] !== null) {
+
 
                  /*   if (i === 0) {
                         let next_row = document.createElement('div');
@@ -65,8 +65,6 @@ function listCharacters()
                     image.style.position = 'fixed';
                     card.appendChild(image);*/
 
-                    console.log(data.results[i]['gender']);
-
 
                     if (data.results[i]['gender'] === 'Male') {
                         gender['Male'].push(i);
@@ -77,10 +75,11 @@ function listCharacters()
                     }
 
 
-                        fillGenderChart(data.results.length);
 
 
-                        let cards = document.getElementsByClassName('card');
+
+                /*        let cards = document.getElementsByClassName('card');
+                        console.log(cards);
 
                         for (let j = 0; j < cards.length; j++) {
                             cards[j].addEventListener('click', site_click_character);
@@ -88,16 +87,16 @@ function listCharacters()
                             /*cards[j].addEventListener('mouseout', function () {
                                 this.style.border = '0';
                             });*/
-                        }
+                       // }
 
-                        cards[0].click();
+                     //   cards[0].click();
 
 
 
                 }
+                fillGenderChart(data.results.length);
 
-
-
+                    getCharacter(1);
 
 
 
@@ -210,29 +209,29 @@ function getCharacter(id)
     fetch('https://rickandmortyapi.com/api/character/'+id)
         .then(response => response.json())
         .then(data => {
-            console.log(data.results);
+            console.log(data);
 
-            if (data.results) {
+            if (data) {
                 let details = document.getElementsByClassName('site_character_details');
 
                 for (let j = 0; j < details.length; j++) {
                     if (j === 0) {
                         let image = document.getElementsByClassName('site_character_image');
-                        image.src = data.results['image'];
+                        image.src = data['image'];
 
                     } else {
                         switch (j) {
                             case 1:
-                                details[j].innerHTML = data.results['name'];
+                                details[j].innerHTML += data['name'];
                                 break;
                             case 2:
-                                details[j].innerHTML = data.results['location'];
+                                details[j].innerHTML += data['location']['name'];
                                 break;
                             case 3:
-                                details[j].innerHTML = data.results['species'];
+                                details[j].innerHTML += data['species'];
                                 break;
                             case 4:
-                                details[j].innerHTML = data.results['gender'];
+                                details[j].innerHTML += data['gender'];
                                 break;
                             default:
                                 break;
