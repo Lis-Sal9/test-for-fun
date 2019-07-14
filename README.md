@@ -1,2 +1,3 @@
-# test-for-fun
+# TEST FOR FUN
+
 Test for fun.

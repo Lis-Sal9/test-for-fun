@@ -136,22 +136,17 @@
 /** Character **/
 .site_character
 {
-    padding: 2.6vh;
-    padding-left: 0 !important;
-    padding-right: 4vh !important;
+    padding: 0 4vh 2.6vh 0 !important;
     position:fixed;
     width:20vw;
     height:45vh;
     top:10vh;
-    padding-bottom: 0 !important;
     display: none;
 }
 
 .site_character_details
 {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    padding-bottom: 0.5vh;
+    padding: 0 0 0 0.5vh !important;
     font-size: 1.5vh;
     text-align: center;
 }

@@ -2,14 +2,12 @@
 /** Initialise all variables **/
 // General
 let site_index = document.getElementsByClassName('site_index')[0];
-let site_header = document.getElementsByClassName('site_header')[0];
 
 // Characters
 let index_cards = document.getElementsByClassName('site_cards')[0];
 let character_details = document.getElementsByClassName('site_character')[0];
 let selected_card = document.getElementsByClassName('site_selected_card');
 let site_card_images = document.getElementsByClassName('site_card_image');
-let site_card_row = index_cards.getElementsByClassName('row');
 
 // Search
 let search = document.getElementsByClassName('site_search')[0];
