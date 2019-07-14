@@ -23,6 +23,7 @@
     position: absolute;
     margin-right: 0;
     padding: 2.6vh;
+    padding-left: 0 !important;
     top: 0;
     left: 0;
     right: 0;
@@ -136,11 +137,14 @@
 .site_character
 {
     padding: 2.6vh;
+    padding-left: 0 !important;
+    padding-right: 4vh !important;
     position:fixed;
     width:20vw;
     height:45vh;
     top:10vh;
-    padding-bottom:0 !important;
+    padding-bottom: 0 !important;
+    display: none;
 }
 
 .site_character_details
@@ -166,9 +170,7 @@
 /** Chart **/
 #site_chart
 {
-    padding: 2.6vh;
-    padding-top:0 !important;
-    padding-bottom: 4vh !important;
+    padding: 0 6vh 4vh 0 !important;
     position:fixed;
     width:20vw;
     height:45vh;
@@ -191,6 +193,7 @@
 {
     opacity: 0.6;
     cursor: pointer;
+    transition: all 1s;
 }
 
 .bars .male

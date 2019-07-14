@@ -32,12 +32,13 @@ body
     cursor: pointer;
     margin-left: 3vh;
     min-width: 15vh;
-    padding: 0;
+    padding: 0 !important;
 }
 
 .site_logo:hover
 {
     transform: rotate(90deg);
+    margin-top: 2vh;
 }
 
 .site_title
