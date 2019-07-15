@@ -191,6 +191,11 @@
     transition: all 1s;
 }
 
+.bars div:active
+{
+    pointer-events: none;
+}
+
 .bars .male
 {
     background-color: #1b4c4e;

@@ -25,6 +25,7 @@ let site_chart = document.getElementById('site_chart');
 // Other
 let gender = {'Male': [], 'Female': [], 'Unknown' : []};
 let selected_image = 0;
+let selected_page = 1;
 let site_click_character = function () {
     let id = (this.src.split('.')[1]).split('/')[4];
 
@@ -59,23 +60,43 @@ search_submit.addEventListener('click', function(){
  * Initialise web
  */
 window.onload = function() {
-    setPage(1);
+    setPage();
 
     site_index.addEventListener('click', function(event){
         if (event.target.classList[0] !== 'site_card_image') {
             character_details.style.display = 'none';
 
-            if (event.target.classList[0] !== 'site_card_image') {
-                if (selected_image !== 0) {
-                    index_cards.getElementsByClassName('site_card_image card_' + selected_image)[0].classList.remove('site_selected_card');
+            if (selected_image !== 0 && event.target.classList[2] === 'site_pagination_icon') {
+                if (selected_card.length > 0) {
+                    let num_image = selected_card[0].classList[1].split('_')[1];
+                    index_cards.getElementsByClassName('site_card_image card_' + num_image)[0].classList.remove('site_selected_card');
+                }
+
+            } else if (selected_image !== 0 && event.target.classList[2] !== 'site_pagination_icon' && event.target.classList[0] !== 'male' && event.target.classList[0] !== 'female' && event.target.classList[0] !== 'unknown') {
+                if (selected_card.length > 0) {
+                    let num_image = selected_card[0].classList[1].split('_')[1];
+                    index_cards.getElementsByClassName('site_card_image card_' + num_image)[0].classList.remove('site_selected_card');
+                    selected_image = 0;
+                }
+
+            } else if (selected_image !== 0 && (event.target.classList[0] === 'male' || event.target.classList[0] === 'female' || event.target.classList[0] === 'unknown')) {
+                character_details.style.display = 'block';
+
+                if (selected_card.length > 0) {
+                    let num_image = selected_card[0].classList[1].split('_')[1];
+                    index_cards.getElementsByClassName('site_card_image card_' + num_image)[0].classList.add('site_selected_card');
                 }
             }
         }
     });
+
+    site_pagination_previous.addEventListener('click', function () {
+        selected_page -= 1;
+        setPage(selected_page);
+    });
+
+    site_pagination_next.addEventListener('click', function () {
+        selected_page += 1;
+        setPage(selected_page);
+    });
 };
-
-
-
-
-
-

@@ -1,27 +1,3 @@
-/**
- * List all characters on index.
- */
-function listCharacters(page = null)
-{
-    let url = 'https://rickandmortyapi.com/api/character';
-    if (page !== null) {
-        url += '/?page=' + page;
-    }
-
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-
-            if (data.results.length  > 0) {
-                setAllCards(data);
-                setPagination(data);
-            }
-        })
-        .catch(function(err) {
-            console.error(err);
-        });
-}
 
 /**
  * Generate chart according to gender.
@@ -74,7 +50,16 @@ function fillGenderChart(num_characters)
 function clearGenderChart()
 {
     site_chart.innerHTML = '';
-    console.log(site_chart);
+}
+
+/**
+ * Clear all old cards.
+ */
+function clearCards()
+{
+    for (let i=0; i<site_card_images.length; i++) {
+        site_card_images[i].src = '';
+    }
 }
 
 /**
@@ -89,11 +74,7 @@ function hoverCardsByGender()
             let class_name = bars[i].className.charAt(0).toUpperCase() + bars[i].className.slice(1);
 
             bars[i].addEventListener('mouseover', function () {
-                console.log('num: ' +selected_image);
                 if (selected_image !== 0) {
-                    console.log('selected card');
-                    console.log(selected_card[i]);
-
                     if (selected_card.length > 0) {
                         selected_card[0].classList.remove('site_selected_card');
                     }
@@ -104,14 +85,18 @@ function hoverCardsByGender()
                 }
             });
 
-            bars[i].addEventListener('mouseout', function () {
+            bars[i].addEventListener('mouseout', function (event) {
                 for (let i = 0; i < gender[class_name].length; i++) {
                     site_card_images[gender[class_name][i]].classList.remove('site_selected_card');
                 }
 
-                if (selected_image !== 0) {
-                    console.log('selected card');
-                    document.getElementsByClassName('site_card_image card_' + selected_image)[0].classList.add('site_selected_card');
+                if (selected_image !== 0 && event.target.classList[2] !== 'site_pagination_icon') {
+                    index_cards.getElementsByClassName('card_'+(selected_image - 20 * (selected_page - 1)))[0].classList.add('site_selected_card');
+                    character_details.style.display = 'block';
+
+                } else if (selected_image !== 0 && event.target.classList[2] === 'site_pagination_icon') {
+                    index_cards.getElementsByClassName('card_'+selected_image)[0].classList.remove('site_selected_card');
+                    character_details.style.display = 'none';
                 }
             });
         }
@@ -162,99 +147,16 @@ function getCharacter(id)
 }
 
 /**
- * Set the correct pagination params.
- * @param page
- */
-function setPagination(page)
-{
-  /*  site_pagination_name.innerHTML = getPaginator(data) + ' / ' + data['info']['pages'];
-
-    if (data['info']['prev'] === '') {
-        site_pagination_previous.style.display = 'none';
-    } else if (data['info']['prev']) {
-        site_pagination_previous.style.display = 'block';
-    }
-
-    if (data['info']['next'] === '') {
-        site_pagination_next.style.display = 'none';
-    } else if (data['info']['next']) {
-        site_pagination_next.style.display = 'block';
-    }*/
-
-    site_pagination_previous.addEventListener('click', function () {
-      /*  console.log('PREV: '+getPaginator(data));
-
-        let paginator = 1;
-        if (getPaginator(data) !== paginator) {
-            paginator = getPaginator(data) - 1;
-        }*/
-
-        console.log(selected_card);
-        if (selected_card.length > 0) {
-            selected_card[0].classList.remove('site_selected_card');
-
-        }
-
-        gender = {'Male': [], 'Female': [], 'Unknown' : []};
-        setPage(page-1);
-
-
-       // setPage(getPaginator(data));
-        site_pagination_previous.removeEventListener('click', function () {});
-    });
-
-    site_pagination_next.addEventListener('click', function () {
-
-        console.log(selected_card);
-        if (selected_card.length > 0) {
-            selected_card[0].classList.remove('site_selected_card');
-
-        }
-
-       // console.log('NEXT: '+getPaginator(data));
-
-      /*  let paginator = data['info']['pages'];
-        console.log('max paginator nextt' + paginator);
-        if (getPaginator(data) !== paginator) {
-            paginator = getPaginator(data) + 1;
-            console.log('max paginator next' + paginator);
-        }
-
-        setPage(paginator);
-*/
-
-        if (page === 25) {
-            setPage(25);
-        } else {
-            setPage(page+1);
-        }
-
-        site_pagination_next.removeEventListener('click', function () {});
-    });
-}
-
-function getPaginator(data)
-{
-    console.log('iddd' + data['results'][data['results'].length-1]['id']);
-    console.log('getpaginator: '+ data['results'][data['results'].length-1]['id'] / Math.round(data['info']['count']/data['info']['pages']));
-
-    console.log('resultats / pàgines '+ data['results'][data['results'].length-1]['id'] + '/' +Math.round(data['info']['count']/data['info']['pages']));
-    return data['results'][data['results'].length-1]['id'] / Math.round(data['info']['count']/data['info']['pages']);
-}
-
-/**
  * Show the correct page according to direction (previous or next).
- * @param page
  */
-function setPage(page) {
-    if (page === 0) {
-        page = 1;
-    } else if (page === 26) {
-        page = 25;
+function setPage() {
+    if (selected_page === 0) {
+        selected_page = 1;
+    } else if (selected_page === 26) {
+        selected_page = 25;
     }
-    console.log('SET PAGE: '+page);
 
-    fetch('https://rickandmortyapi.com/api/character/?page='+page)
+    fetch('https://rickandmortyapi.com/api/character/?page='+selected_page)
         .then(response => response.json())
         .then(data => {
             if (data) {
@@ -271,35 +173,8 @@ function setPage(page) {
                     site_pagination_next.style.display = 'block';
                 }
 
-                site_pagination_name.innerHTML = page + ' / ' + data['info']['pages'];
-
+                site_pagination_name.innerHTML = selected_page + ' / ' + data['info']['pages'];
                 setAllCards(data);
-
-                site_pagination_previous.addEventListener('click', function () {
-
-                    if (selected_card.length > 0) {
-                        selected_card[0].classList.remove('site_selected_card');
-
-                    }
-
-                    setPage(page-1);
-
-                    site_pagination_previous.removeEventListener('click', function () {});
-                });
-
-                site_pagination_next.addEventListener('click', function () {
-
-                    if (selected_card.length > 0) {
-                        selected_card[0].classList.remove('site_selected_card');
-
-                    }
-
-                    setPage(page+1);
-
-                    site_pagination_next.removeEventListener('click', function () {});
-                });
-
-
             }
         })
         .catch(function(err) {
@@ -313,13 +188,11 @@ function setPage(page) {
  */
 function setAllCards(data)
 {
+    clearCards();
     gender = {'Male': [], 'Female': [], 'Unknown' : []};
-    console.log('SET ALL CARDS!!!');
     character_details.style.display = 'none';
 
-    console.log('length images: '+site_card_images.length);
-
-    for (let i=0; i<site_card_images.length; i++) {
+    for (let i=0; i<data.results.length; i++) {
         site_card_images[i].src = data.results[i].image;
         site_card_images[i].style.display = 'block';
         site_card_images[i].addEventListener('click', site_click_character);
@@ -333,9 +206,11 @@ function setAllCards(data)
         }
     }
 
-    console.log(gender['Male'].length);
-    console.log(gender['Female'].length);
+    if (data.results.length < site_card_images.length) {
+        for (let i=data.results.length; i<site_card_images.length; i++) {
+            site_card_images[i].style.display = 'none';
+        }
+    }
 
     fillGenderChart(data.results.length);
-   // setPagination(page);
 }
